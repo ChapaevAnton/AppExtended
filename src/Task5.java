@@ -67,6 +67,11 @@ final class BattleField {
         warriorAttack.setAttack(new Random().nextInt(100));
         warriorDefence.setHealth(warriorDefence.getHealth() - warriorAttack.getAttack());
 
+        if (warriorDefence.getHealth() <= 0) {
+            warriorDefence.setHealth(0);
+            warriorDefence.setLive(false);
+        }
+
         System.out.printf("Войн %s(здоровье:%d) ударил на %d война %s(здоровье:%d) \n",
                 warriorAttack.getName(),
                 warriorAttack.getHealth(),
@@ -74,20 +79,12 @@ final class BattleField {
                 warriorDefence.getName(),
                 warriorDefence.getHealth());
 
-        if (warriorDefence.getHealth() <= 0) {
-            warriorDefence.setLive(false);
-            warriorDefence.setHealth(0);
-            winnerStatus.win(warriorAttack);
-        }
+        if (!warriorDefence.isLive()) winnerStatus.win(warriorAttack);
 
         return warriorDefence.isLive();
-
-
     }
 
-
 }
-
 
 public class Task5 {
 
@@ -97,9 +94,7 @@ public class Task5 {
         Warrior warrior2 = new Warrior("Ильюша");
 
         BattleField battleField = new BattleField();
-        battleField.battle(warrior2, warrior1, (warrior) -> {
-            System.out.println("Победил:" + warrior.getName());
-        });
+        battleField.battle(warrior2, warrior1, (warrior) -> System.out.println("Победил:" + warrior.getName()));
 
     }
 
