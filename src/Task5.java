@@ -94,7 +94,7 @@ public class Task5 {
         Warrior warrior2 = new Warrior("Ильюша");
 
         BattleField battleField = new BattleField();
-        battleField.battle(warrior2, warrior1, (warrior) -> System.out.println("Победил:" + warrior.getName()));
+        battleField.battle(warrior1, warrior2, (warrior) -> System.out.println("Победил:" + warrior.getName()));
 
     }
 
